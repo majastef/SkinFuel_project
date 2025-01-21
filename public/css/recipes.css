@@ -1,0 +1,143 @@
+/*Style for main content on Recipes page*/
+.recipes-text {
+  text-align: center;
+  font-size: 27px;
+  margin: 10px auto;
+  padding: 3px;
+  width: 100vw;
+  background-color: rgb(244, 235, 247);
+}
+
+.text-imgs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  padding: 3px;
+  width: 100vw;
+  background-color: rgb(244, 235, 247);
+}
+
+.text-imgs p {
+  font-size: 27px;
+  margin: 3px 3px;
+}
+
+img {
+  height: 30px;
+}
+
+.good-bad-facts {
+  display: flex;
+  flex-direction: column;
+}
+
+.bad {
+  margin: 2px auto;
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+  border-radius: 50px;
+  background-color: rgb(246, 192, 192);
+  box-shadow: 0 2px 8px rgb(207, 161, 161);
+}
+
+.good {
+  display: flex;
+  flex-direction: row;
+  margin: 2px auto;
+  padding: 20px;
+  text-align: center;
+  gap: 70px;
+}
+
+.good div {
+  margin: 2px auto;
+  padding: 20px;
+  max-width: 250px;
+  text-align: center;
+  border-radius: 50px;
+  background-color: rgb(194, 238, 179);
+  box-shadow: 0 2px 8px rgb(155, 191, 144);
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.main .card {
+  margin: 20px auto;
+  padding: 20px;
+  width: 250px;
+  height: 200px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: rgb(235, 227, 238);
+  box-shadow: 0 7px 10px rgba(0, 0, 0, 0.1);
+}
+
+.headline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headline img {
+  margin-right: 5px;
+}
+
+.main div p {
+  margin-bottom: 45px;
+}
+
+#view-link {
+  text-decoration: none;
+  color: black;
+  padding: 15px;
+  border: 2px solid rgb(180, 180, 180);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#view-link:hover {
+  background-color: rgb(202, 181, 209);
+  border: 2px solid rgb(202, 181, 209);
+}
+
+
+/*Style for meals*/
+h1 {
+  text-align: center;
+}
+
+.parent-recipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.parent-recipe h1 {
+  margin: 2px auto;
+  width: 100vw;
+  background-color: rgb(225, 245, 214);
+}
+
+.recipe-box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px;
+}
+
+.recipe-box div {
+  margin: 20px 10px;
+  padding: 20px;
+  max-width: 350px;
+  border-radius: 8px;
+  background-color: rgb(235, 227, 238);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*Style for snacks*/
+
+/*Style for juices*/

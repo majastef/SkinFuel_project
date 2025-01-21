@@ -1,0 +1,23 @@
+body {
+  text-align: center;
+}
+
+.form {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 500px;
+  border: 2px solid #e7e7e7;
+  border-radius: 10px;
+  background-color: aliceblue;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form div {
+  margin-bottom: 15px;
+}
+
+#send-email-button {
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}

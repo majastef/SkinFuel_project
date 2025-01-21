@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/recipes.css">
+  </head>
+
+  <body>
+    {{> header}}
+
+    <label for="veganFilter">Dietary Preference:</label>
+    <select name="veganFilter" id="veganFilter">
+      <option value="volvo">None</option>
+      <option value="saab">Vegan</option>
+      <option value="mercedes">Non-Vegan</option>
+    </select>
+
+    <label for="allergy">Allergy:</label>
+    <select name="allergy" id="allergy">
+      <option value="volvo">None</option>
+      <option value="volvo">Gluten</option>
+      <option value="saab">Dairy</option>
+      <option value="mercedes">Nut</option>
+    </select>
+
+    <div class="parent-recipe">
+      <h1>BREAKFAST</h1>
+      <div class="recipe-box">
+        {{#each breakfast}}
+          <div>
+            <h2>{{name}}</h2>
+            Ingredients:
+
+            <ul>
+            {{#each ingredients}}
+              <li>{{this}}</li>
+            {{/each}}
+            </ul>
+              
+            Instructions:
+            <p>{{instructions}}</p>
+          </div>
+        {{/each}}
+      </div>
+
+      <h1>LUNCH</h1>
+      <div class="recipe-box">
+        {{#each lunch}}
+          <div>
+            <h2>{{name}}</h2>
+            Ingredients:
+
+            <ul>
+            {{#each ingredients}}
+              <li>{{this}}</li>
+            {{/each}}
+            </ul>
+              
+            Instructions:
+            <p>{{instructions}}</p>
+          </div>
+        {{/each}}
+      </div>
+
+      <h1>DINNER</h1>
+      <div class="recipe-box">
+        {{#each dinner}}
+          <div>
+            <h2>{{name}}</h2>
+            Ingredients:
+
+            <ul>
+            {{#each ingredients}}
+              <li>{{this}}</li>
+            {{/each}}
+            </ul>
+              
+            Instructions:
+            <p>{{instructions}}</p>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
