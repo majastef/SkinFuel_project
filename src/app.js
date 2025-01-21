@@ -28,11 +28,17 @@ hbs.registerPartials(partialsPath)
 // Customize a server, static takes a path to the folder we want to serve up
 app.use(express.static(publicDirectoryPath))
 
+let filters = [String]
+
 io.on('connection', (socket) => {
   console.log('New WebSocket Connection!')
 
   socket.on('send-email', (email, content) => {
     sendHelpEmail(email, content)
+  })
+
+  socket.on('filter', (nonvegan, allergy) => {
+    filters = [nonvegan, allergy]
   })
 })
 
@@ -45,10 +51,14 @@ app.get('/recipes', (req, res) => {
 })
 
 app.get('/recipes/meals', async (req, res) => {
+  const breakfast = await fetchData('breakfast', filters)
+  const lunch = await fetchData('lunch', filters)
+  const dinner = await fetchData('dinner', filters)
+  
   res.render('recipes/meals', {
-    breakfast: await fetchData('breakfast'),
-    lunch: await fetchData('lunch'),
-    dinner: await fetchData('dinner')
+    breakfast,
+    lunch,
+    dinner
   })
 })
 

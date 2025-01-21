@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { noDuplicates, removed } = require('./modelFunctions')
 
 const recipeSchema = new mongoose.Schema({
   recipeType: {
@@ -20,7 +21,19 @@ const recipeSchema = new mongoose.Schema({
   }
 })
 
+const filterSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  ingredients: {
+    type: [String],
+    required: true
+  }
+})
+
 const Recipe = mongoose.model('Recipe', recipeSchema)
+const Filter = mongoose.model('Filter', filterSchema)
 
 async function createRecipes(fetchedRecipes) {
   try {
@@ -107,23 +120,57 @@ async function createRecipes(fetchedRecipes) {
       }
     ]
 
-    // To evade duplicates
-    for (let recipe of recipes) {
-      const existingRecipe = fetchedRecipes.find(fetched => fetched.name === recipe.name)
+    noDuplicates(recipes, fetchedRecipes, Recipe)
+    removed(recipes, fetchedRecipes, Recipe)
 
-      if (!existingRecipe) {
-        await Recipe.create(recipe)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+async function createFilters(fetchedFilters) {
+  try {
+    const filters = [
+      {
+        "name": "non-vegan",
+        "ingredients": [
+          "egg",
+          "chicken breast",
+          "salmon fillet",
+          "cheese",
+          "butter"
+        ]
+      },
+      {
+        "name": "gluten",
+        "ingredients": [
+          "whole-grain bread",
+          "oats",
+          "wheat flour"
+        ]
+      },
+      {
+        "name": "dairy",
+        "ingredients": [
+          "milk",
+          "butter",
+          "cheese",
+          "yogurt"
+        ]
+      },
+      {
+        "name": "nut",
+        "ingredients": [
+          "almond",
+          "cashews",
+          "pistachios",
+          "walnuts"
+        ]
       }
-    }
+    ]
 
-    // To remove recipes when removed from the list above
-    const removedRecipe = fetchedRecipes.filter(fetched => !recipes.some(recipe => recipe.name === fetched.name))
-
-    if (removedRecipe) {
-      for (let recipe of removedRecipe) {
-        await Recipe.deleteOne({ name: recipe.name })
-      }
-    }
+    noDuplicates(filters, fetchedFilters, Filter)
+    removed(filters, fetchedFilters, Filter)
 
   } catch (error) {
     console.log(error)
@@ -132,5 +179,7 @@ async function createRecipes(fetchedRecipes) {
 
 module.exports = { 
   Recipe,
-  createRecipes
+  Filter,
+  createRecipes,
+  createFilters
 }

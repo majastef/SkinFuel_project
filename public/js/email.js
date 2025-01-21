@@ -1,9 +1,6 @@
-const socket = io()
-
 const sendEmail = document.getElementById('send-email-button')
 
 sendEmail.addEventListener("click", () => {
-  console.log('clicked')
   const email = document.getElementById('email').value
   const content = document.getElementById('content').value
 
