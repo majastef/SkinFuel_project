@@ -9,25 +9,26 @@
   <body>
     {{> header}}
 
-    <label for="non-vegan">Dietary Preference:</label>
-    <select name="non-vegan" id="non-vegan">
-      <option value="none">None</option>
-      <option value="vegan">Vegan</option>
-      <option value="non-vegan">Non-Vegan</option>
-    </select>
+    <form class="filter-form">
+      <label for="vegan">Dietary Preference:</label>
+      <select name="vegan" id="vegan">
+        <option value="none">None</option>
+        <option value="vegan">Vegan</option>
+      </select>
+      
+      <label for="allergy">Allergy:</label>
+      <select name="allergy" id="allergy">
+        <option value="none">None</option>
+        <option value="gluten">Gluten</option>
+        <option value="dairy">Dairy</option>
+        <option value="nut">Nut</option>
+      </select>
 
-    <label for="allergy">Allergy:</label>
-    <select name="allergy" id="allergy">
-      <option value="none">None</option>
-      <option value="gluten">Gluten</option>
-      <option value="dairy">Dairy</option>
-      <option value="nut">Nut</option>
-    </select>
-
-    <a href="/recipes/meals" id="filter">Filter</a>
+      <a href="/recipes/meals" id="filter">Filter</a>
+    </form>
 
     <div class="parent-recipe">
-      <h1>BREAKFAST</h1>
+      <h1>{{breakfastTitle}}</h1>
       <div class="recipe-box">
         {{#each breakfast}}
           <div>
@@ -46,7 +47,7 @@
         {{/each}}
       </div>
 
-      <h1>LUNCH</h1>
+      <h1>{{lunchTitle}}</h1>
       <div class="recipe-box">
         {{#each lunch}}
           <div>
@@ -65,7 +66,7 @@
         {{/each}}
       </div>
 
-      <h1>DINNER</h1>
+      <h1>{{dinnerTitle}}</h1>
       <div class="recipe-box">
         {{#each dinner}}
           <div>

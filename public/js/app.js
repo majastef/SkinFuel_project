@@ -17,7 +17,7 @@ navBarLinks.forEach(link => {
 })
 
 filterButton.addEventListener('click', () => {
-  const vegan = document.getElementById('non-vegan').value 
+  const vegan = document.getElementById('vegan').value 
   const allergy = document.getElementById('allergy').value
 
   socket.emit('filter', vegan, allergy)

@@ -107,6 +107,50 @@ img {
 
 
 /*Style for meals*/
+.filter-form {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+label {
+  padding: 6px;
+}
+
+select {
+  width: 100px;
+  padding: 6px;
+  margin-right: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+select:focus {
+  border-color: #6600c0;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+a#filter {
+  text-decoration: none;
+  padding: 6px;
+  margin-left: 10px;
+  border: 1.5px solid rgb(180, 180, 180);
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: black;
+  cursor: pointer;
+}
+
+a#filter:hover {
+  background-color: rgb(205, 198, 207);
+  border: 1.5px solid rgb(205, 198, 207);
+}
+
 h1 {
   text-align: center;
 }
@@ -137,7 +181,5 @@ h1 {
   background-color: rgb(235, 227, 238);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-
-/*Style for snacks*/
 
 /*Style for juices*/

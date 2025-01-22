@@ -28,7 +28,8 @@ hbs.registerPartials(partialsPath)
 // Customize a server, static takes a path to the folder we want to serve up
 app.use(express.static(publicDirectoryPath))
 
-let filters = [String]
+let filters = []
+let fetchedFilters = []
 
 io.on('connection', (socket) => {
   console.log('New WebSocket Connection!')
@@ -37,8 +38,8 @@ io.on('connection', (socket) => {
     sendHelpEmail(email, content)
   })
 
-  socket.on('filter', (nonvegan, allergy) => {
-    filters = [nonvegan, allergy]
+  socket.on('filter', (vegan, allergy) => {
+    fetchedFilters = [vegan, allergy]
   })
 })
 
@@ -51,19 +52,40 @@ app.get('/recipes', (req, res) => {
 })
 
 app.get('/recipes/meals', async (req, res) => {
+  filters = ['none', 'none']
+
+  if (fetchedFilters.length) {
+    filters = fetchedFilters
+  } 
+
+  let breakfastTitle = ''
+  let lunchTitle = ''
+  let dinnerTitle = ''
+
   const breakfast = await fetchData('breakfast', filters)
   const lunch = await fetchData('lunch', filters)
   const dinner = await fetchData('dinner', filters)
+
+  if (breakfast) {
+    breakfastTitle = 'BREAKFAST'
+  }
+
+  if (lunch) {
+    lunchTitle = 'LUNCH'
+  }
+
+  if (dinner) {
+    dinnerTitle = 'DINNER'
+  }
   
   res.render('recipes/meals', {
     breakfast,
+    breakfastTitle,
     lunch,
-    dinner
+    lunchTitle,
+    dinner,
+    dinnerTitle
   })
-})
-
-app.get('/recipes/snacks', (req, res) => {
-  res.render('recipes/snacks')
 })
 
 app.get('/recipes/juices', (req, res) => {

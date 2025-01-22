@@ -40,13 +40,12 @@ async function createRecipes(fetchedRecipes) {
     const recipes = [
       {
         "recipeType": "breakfast",
-        "name": "Berry Smoothie Bowl (Vegan)",
+        "name": "Berry Smoothie Bowl",
         "ingredients": [
           "1 cup frozen mixed berries (blueberries, raspberries, strawberries)",
           "1 frozen banana",
           "1 cup unsweetened almond milk",
           "1 tablespoon chia seeds",
-          "1 tablespoon almond butter",
           "Toppings: Fresh berries, granola, shredded coconut"
         ],
         "instructions": "Blend the frozen berries, banana, almond milk, chia seeds, and almond butter until smooth. Pour into a bowl and top with fresh berries, granola, and shredded coconut."
@@ -65,7 +64,7 @@ async function createRecipes(fetchedRecipes) {
       },
       {
         "recipeType": "lunch",
-        "name": "Quinoa Buddha Bowl (Vegan)",
+        "name": "Quinoa Buddha Bowl",
         "ingredients": [
           "1 cup cooked quinoa",
           "1 cup roasted sweet potato cubes",
@@ -91,7 +90,7 @@ async function createRecipes(fetchedRecipes) {
       },
       {
         "recipeType": "dinner",
-        "name": "Lentil and Spinach Curry (Vegan)",
+        "name": "Lentil and Spinach Curry",
         "ingredients": [
           "1 cup cooked lentils",
           "1 tablespoon olive oil",
@@ -132,7 +131,7 @@ async function createFilters(fetchedFilters) {
   try {
     const filters = [
       {
-        "name": "non-vegan",
+        "name": "vegan",
         "ingredients": [
           "egg",
           "chicken breast",

@@ -22,12 +22,30 @@ const connectToDatabase = async () => {
 const fetchData = async (type, filters) => {
   const recipes = await Recipe.find({ recipeType: type })
 
+  // Checks if there are 'none' elements in filter
   const none = filters.filter(filter => filter === 'none')
 
   if (none.length === 0) {
-    console.log('no none el')
+    console.log('Filters are:', filters)
+    console.log('all filters are not none')
   } else if (none.length < filters.length) {
     console.log('at least one is none')
+
+    // All filters that are not 'none'
+    const notNoneFilters = filters.filter(filter => filter !== 'none')
+    
+    // For every filter that is not 'none'
+    for (let notNone of notNoneFilters) {
+      // Find the filter from database
+      const fetchedNotNone = await Filter.findOne({ name: notNone })
+
+      const filteredRecipes = recipes.filter(recipe => {
+        return recipe.ingredients.every(ingredient => 
+          fetchedNotNone.ingredients.every(filterIngredient => !ingredient.includes(filterIngredient))
+        )
+      })
+      return filteredRecipes
+    }
   } else {
     return recipes
   }
