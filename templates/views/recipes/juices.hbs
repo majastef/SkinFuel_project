@@ -8,6 +8,41 @@
 
   <body>
     {{>header}}
+
+    <form class="filter-form">
+      <label for="allergy">Allergy:</label>
+      <select name="allergy" id="allergy">
+        <option value="none">None</option>
+        <option value="gluten">Gluten</option>
+        <option value="dairy">Dairy</option>
+        <option value="nut">Nut</option>
+      </select>
+
+      <a href="/recipes/meals" id="filter">Filter</a>
+    </form>
+
+    <div class="parent-recipe">
+      <h1>{{breakfastTitle}}</h1>
+      <div class="recipe-box">
+        {{#each breakfast}}
+          <div>
+            <h2>{{name}}</h2>
+            Ingredients:
+
+            <ul>
+            {{#each ingredients}}
+              <li>{{this}}</li>
+            {{/each}}
+            </ul>
+              
+            Instructions:
+            <p>{{instructions}}</p>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
     <script src="/js/app.js"></script>
   </body>
 </html>

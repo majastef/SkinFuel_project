@@ -25,29 +25,47 @@ const fetchData = async (type, filters) => {
   // Checks if there are 'none' elements in filter
   const none = filters.filter(filter => filter === 'none')
 
-  if (none.length === 0) {
-    console.log('Filters are:', filters)
-    console.log('all filters are not none')
+  if (none.length === filters.length) {
+    // all filters are 'none', there are no filters
+    return recipes
   } else if (none.length < filters.length) {
-    console.log('at least one is none')
-
+    // at least one filter is none
     // All filters that are not 'none'
     const notNoneFilters = filters.filter(filter => filter !== 'none')
-    
+
+    let filtered = []
+    let notFiltered = []
+
     // For every filter that is not 'none'
     for (let notNone of notNoneFilters) {
       // Find the filter from database
       const fetchedNotNone = await Filter.findOne({ name: notNone })
 
-      const filteredRecipes = recipes.filter(recipe => {
+      // good recipe for filter
+      const filteredRecipe = recipes.filter(recipe => {
         return recipe.ingredients.every(ingredient => 
           fetchedNotNone.ingredients.every(filterIngredient => !ingredient.includes(filterIngredient))
         )
       })
-      return filteredRecipes
+
+      // not good for that filter
+      const notFilteredRecipe = recipes.filter(recipe => {
+        return recipe.ingredients.some(ingredient => 
+          fetchedNotNone.ingredients.some(filterIngredient => ingredient.includes(filterIngredient))
+        )
+      })
+
+      if (!notFiltered.includes(notFilteredRecipe[0])) {
+        notFiltered.push(notFilteredRecipe[0])
+      }
+
+      if (!filtered.includes(filteredRecipe[0])) {
+        filtered.push(filteredRecipe[0])
+      }
     }
-  } else {
-    return recipes
+
+    filtered= filtered.filter(recipe => !notFiltered.includes(recipe))
+    return(filtered)
   }
 }
 

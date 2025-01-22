@@ -64,19 +64,6 @@ async function createRecipes(fetchedRecipes) {
       },
       {
         "recipeType": "lunch",
-        "name": "Quinoa Buddha Bowl",
-        "ingredients": [
-          "1 cup cooked quinoa",
-          "1 cup roasted sweet potato cubes",
-          "½ cup steamed broccoli",
-          "½ cup chickpeas, roasted or boiled",
-          "1 handful fresh spinach",
-          "2 tablespoons tahini dressing"
-        ],
-        "instructions": "Arrange the quinoa, sweet potato, broccoli, chickpeas, and spinach in a bowl. Drizzle with tahini dressing and serve."
-      },
-      {
-        "recipeType": "lunch",
         "name": "Grilled Chicken Salad with Avocado",
         "ingredients": [
           "1 grilled chicken breast, sliced",

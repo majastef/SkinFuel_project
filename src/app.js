@@ -58,24 +58,29 @@ app.get('/recipes/meals', async (req, res) => {
     filters = fetchedFilters
   } 
 
-  let breakfastTitle = ''
-  let lunchTitle = ''
-  let dinnerTitle = ''
-
   const breakfast = await fetchData('breakfast', filters)
   const lunch = await fetchData('lunch', filters)
   const dinner = await fetchData('dinner', filters)
 
-  if (breakfast) {
+  let breakfastTitle = ''
+  let lunchTitle = ''
+  let dinnerTitle = ''
+  let msg = ''
+
+  if (breakfast.length !== 0) {
     breakfastTitle = 'BREAKFAST'
   }
 
-  if (lunch) {
+  if (lunch.length !== 0) {
     lunchTitle = 'LUNCH'
   }
 
-  if (dinner) {
+  if (dinner.length !== 0) {
     dinnerTitle = 'DINNER'
+  }
+
+  if (breakfast.length === 0 && lunch.length === 0 && dinner.length === 0) {
+    msg = 'Oops! There are no recipes for those filters!'
   }
   
   res.render('recipes/meals', {
@@ -84,9 +89,11 @@ app.get('/recipes/meals', async (req, res) => {
     lunch,
     lunchTitle,
     dinner,
-    dinnerTitle
+    dinnerTitle,
+    msg
   })
 })
+
 
 app.get('/recipes/juices', (req, res) => {
   res.render('recipes/juices')
