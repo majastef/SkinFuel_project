@@ -55,16 +55,22 @@ const fetchData = async (type, filters) => {
         )
       })
 
-      if (!notFiltered.includes(notFilteredRecipe[0])) {
+      if (notFilteredRecipe[0] && !notFiltered.includes(notFilteredRecipe[0])) {
         notFiltered.push(notFilteredRecipe[0])
       }
 
-      if (!filtered.includes(filteredRecipe[0])) {
+      if (filteredRecipe[0] && !filtered.includes(filteredRecipe[0])) {
         filtered.push(filteredRecipe[0])
       }
     }
 
-    filtered= filtered.filter(recipe => !notFiltered.includes(recipe))
+    console.log(notFiltered)
+    console.log(filtered)
+
+    if (filtered.length !== 0) {
+      filtered = filtered.filter(recipe => !notFiltered.includes(recipe))
+    }
+    
     return(filtered)
   }
 }
