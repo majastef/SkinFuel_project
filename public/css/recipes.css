@@ -67,7 +67,7 @@ img {
 }
 
 .main .card {
-  margin: 20px auto;
+  margin: 20px 20px;
   padding: 20px;
   width: 250px;
   height: 200px;
@@ -106,7 +106,31 @@ img {
 }
 
 
-/*Style for meals*/
+/*Style for meals and juices*/
+.filter-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#other-page {
+  text-decoration: none;
+  margin-right: 170px;
+  margin-bottom: 15px;
+  padding: 6px;
+  background-color: #f9f9f9;
+  border: 1.5px solid rgb(180, 180, 180);
+  border-radius: 5px;
+  color: black;
+  cursor: pointer;
+}
+
+#other-page:hover {
+  background-color: rgb(202, 185, 207);
+  border: 1.5px solid rgb(205, 198, 207);
+  box-shadow: 0 0 5px rgba(84, 144, 209, 0.5);
+}
+
 .filter-form {
   display: flex;
   flex-direction: row;
@@ -135,7 +159,7 @@ select:focus {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-a#filter {
+a#meals-filter, a#juices-filter, a#remove-meal-filters, a#remove-juice-filters {
   text-decoration: none;
   padding: 6px;
   margin-left: 10px;
@@ -146,9 +170,10 @@ a#filter {
   cursor: pointer;
 }
 
-a#filter:hover {
-  background-color: rgb(205, 198, 207);
+a#meals-filter:hover, a#juices-filter:hover, a#remove-meal-filters:hover, a#remove-juice-filters:hover {
+  background-color: rgb(202, 185, 207);
   border: 1.5px solid rgb(205, 198, 207);
+  box-shadow: 0 0 5px rgba(84, 144, 209, 0.5);
 }
 
 h1 {
@@ -181,5 +206,3 @@ h1 {
   background-color: rgb(235, 227, 238);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-
-/*Style for juices*/

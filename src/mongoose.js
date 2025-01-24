@@ -1,6 +1,7 @@
 
 const mongoose = require('mongoose')
-const { Recipe, Filter, createRecipes, createFilters } = require('./models')
+const { Meal, MealFilter, createMeals, createMealFilters } = require('./models/meals')
+const { Juice, JuiceFilter, createJuices, createJuiceFilters } = require('./models/juices')
 
 const connectionURL = 'mongodb://127.0.0.1:27017/recipes-data'
 
@@ -9,18 +10,24 @@ const connectToDatabase = async () => {
     await mongoose.connect(connectionURL)
     console.log('Connected to database!')
 
-    const recipes = await Recipe.find()
-    const filters = await Filter.find()
+    const meals = await Meal.find()
+    const mealFilters = await MealFilter.find()
+
+    const juices = await Juice.find()
+    const juiceFilters = await JuiceFilter.find()
     
-    await createRecipes(recipes)
-    await createFilters(filters)
+    await createMeals(meals)
+    await createMealFilters(mealFilters)
+
+    await createJuices(juices)
+    await createJuiceFilters(juiceFilters)
   } catch (error) {
     console.log(error)
   }
 }
 
-const fetchData = async (type, filters) => {
-  const recipes = await Recipe.find({ recipeType: type })
+const fetchMeals = async (type, filters) => {
+  const recipes = await Meal.find({ recipeType: type })
 
   // Checks if there are 'none' elements in filter
   const none = filters.filter(filter => filter === 'none')
@@ -39,7 +46,7 @@ const fetchData = async (type, filters) => {
     // For every filter that is not 'none'
     for (let notNone of notNoneFilters) {
       // Find the filter from database
-      const fetchedNotNone = await Filter.findOne({ name: notNone })
+      const fetchedNotNone = await MealFilter.findOne({ name: notNone })
 
       // good recipe for filter
       const filteredRecipe = recipes.filter(recipe => {
@@ -64,9 +71,6 @@ const fetchData = async (type, filters) => {
       }
     }
 
-    console.log(notFiltered)
-    console.log(filtered)
-
     if (filtered.length !== 0) {
       filtered = filtered.filter(recipe => !notFiltered.includes(recipe))
     }
@@ -75,6 +79,29 @@ const fetchData = async (type, filters) => {
   }
 }
 
+const fetchJuices = async (filter) => {
+  // Fetch all juice recipes and a filter
+  const juices = await Juice.find()
+  
+  // If there is no filter return all juices
+  if (filter === 'none') {
+    return juices
+  } else {
+    const fetchedFilter = await JuiceFilter.findOne({ name: filter })
+    
+    const filteredJuices = juices.filter(juice => {
+      return juice.ingredients.every(ingredient => 
+        fetchedFilter.ingredients.every(filterIngredient => !ingredient.includes(filterIngredient))
+      )
+    })
+
+    return filteredJuices
+  }
+}
+
 connectToDatabase()
 
-module.exports = { fetchData }
+module.exports = { 
+  fetchMeals,
+  fetchJuices
+}

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { noDuplicates, removed } = require('./modelFunctions')
+const { noDuplicates, removed } = require('../modelFunctions')
 
 const recipeSchema = new mongoose.Schema({
   recipeType: {
@@ -32,12 +32,12 @@ const filterSchema = new mongoose.Schema({
   }
 })
 
-const Recipe = mongoose.model('Recipe', recipeSchema)
-const Filter = mongoose.model('Filter', filterSchema)
+const Meal = mongoose.model('Meal', recipeSchema)
+const MealFilter = mongoose.model('MealFilter', filterSchema)
 
-async function createRecipes(fetchedRecipes) {
+async function createMeals(fetchedMeals) {
   try {
-    const recipes = [
+    const meals = [
       {
         "recipeType": "breakfast",
         "name": "Berry Smoothie Bowl",
@@ -106,17 +106,17 @@ async function createRecipes(fetchedRecipes) {
       }
     ]
 
-    noDuplicates(recipes, fetchedRecipes, Recipe)
-    removed(recipes, fetchedRecipes, Recipe)
+    noDuplicates(meals, fetchedMeals, Meal)
+    removed(meals, fetchedMeals, Meal)
 
   } catch (error) {
     console.log(error)
   }
 }
 
-async function createFilters(fetchedFilters) {
+async function createMealFilters(fetchedFilters) {
   try {
-    const filters = [
+    const mealfilters = [
       {
         "name": "vegan",
         "ingredients": [
@@ -155,8 +155,8 @@ async function createFilters(fetchedFilters) {
       }
     ]
 
-    noDuplicates(filters, fetchedFilters, Filter)
-    removed(filters, fetchedFilters, Filter)
+    noDuplicates(mealfilters, fetchedFilters, MealFilter)
+    removed(mealfilters, fetchedFilters, MealFilter)
 
   } catch (error) {
     console.log(error)
@@ -164,8 +164,8 @@ async function createFilters(fetchedFilters) {
 }
 
 module.exports = { 
-  Recipe,
-  Filter,
-  createRecipes,
-  createFilters
+  Meal,
+  MealFilter,
+  createMeals,
+  createMealFilters
 }

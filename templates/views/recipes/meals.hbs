@@ -9,23 +9,28 @@
   <body>
     {{> header}}
 
-    <form class="filter-form">
-      <label for="vegan">Dietary Preference:</label>
-      <select name="vegan" id="vegan">
-        <option value="none">None</option>
-        <option value="vegan">Vegan</option>
-      </select>
-      
-      <label for="allergy">Allergy:</label>
-      <select name="allergy" id="allergy">
-        <option value="none">None</option>
-        <option value="gluten">Gluten</option>
-        <option value="dairy">Dairy</option>
-        <option value="nut">Nut</option>
-      </select>
+    <div class="filter-link">
+      <form class="filter-form">
+        <label for="vegan">Dietary Preference:</label>
+        <select name="vegan" id="vegan">
+          <option value="none">None</option>
+          <option value="vegan">Vegan</option>
+        </select>
+        
+        <label for="allergy">Allergy:</label>
+        <select name="allergy" id="allergy">
+          <option value="none">None</option>
+          <option value="gluten">Gluten</option>
+          <option value="dairy">Dairy</option>
+          <option value="nut">Nut</option>
+        </select>
 
-      <a href="/recipes/meals" id="filter">Filter</a>
-    </form>
+        <a href="/recipes/meals" id="meals-filter">Filter</a>
+        <a href="/recipes/meals" id="remove-meal-filters">Remove filters</a>
+      </form>
+
+      <a href="/recipes/juices" id="other-page">View Juices</a>
+    </div>
 
     <div class="parent-recipe">
       <h1>{{msg}}</h1>

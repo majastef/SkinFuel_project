@@ -7,7 +7,7 @@ const http = require('http')
 const socketio = require('socket.io')
 
 const { sendHelpEmail } = require('./email')
-const { fetchData } = require('./mongoose')
+const { fetchMeals, fetchJuices } = require('./mongoose')
 
 // Generate an application
 const app = express()
@@ -30,6 +30,8 @@ app.use(express.static(publicDirectoryPath))
 
 let filters = []
 let fetchedFilters = []
+let filter = ''
+let fetchedFilter = ''
 
 io.on('connection', (socket) => {
   console.log('New WebSocket Connection!')
@@ -38,8 +40,12 @@ io.on('connection', (socket) => {
     sendHelpEmail(email, content)
   })
 
-  socket.on('filter', (vegan, allergy) => {
+  socket.on('meals-filter', (vegan, allergy) => {
     fetchedFilters = [vegan, allergy]
+  })
+
+  socket.on('juices-filter', (diet) => {
+    fetchedFilter = diet
   })
 })
 
@@ -53,19 +59,18 @@ app.get('/recipes', (req, res) => {
 
 app.get('/recipes/meals', async (req, res) => {
   filters = ['none', 'none']
+  let breakfastTitle = ''
+  let lunchTitle = ''
+  let dinnerTitle = ''
+  let msg = ''
 
   if (fetchedFilters.length) {
     filters = fetchedFilters
   } 
 
-  const breakfast = await fetchData('breakfast', filters)
-  const lunch = await fetchData('lunch', filters)
-  const dinner = await fetchData('dinner', filters)
-
-  let breakfastTitle = ''
-  let lunchTitle = ''
-  let dinnerTitle = ''
-  let msg = ''
+  const breakfast = await fetchMeals('breakfast', filters)
+  const lunch = await fetchMeals('lunch', filters)
+  const dinner = await fetchMeals('dinner', filters)
 
   if (breakfast.length !== 0) {
     breakfastTitle = 'BREAKFAST'
@@ -95,8 +100,28 @@ app.get('/recipes/meals', async (req, res) => {
 })
 
 
-app.get('/recipes/juices', (req, res) => {
-  res.render('recipes/juices')
+app.get('/recipes/juices', async (req, res) => {
+  filter = 'none'
+  let juicesTitle = ''
+  let msg = ''
+
+  if (fetchedFilter) {
+    filter = fetchedFilter
+  }
+
+  const juices = await fetchJuices(filter)
+  
+  if (juices.length === 0) {
+    msg = 'Oops! There are no juices for those filters!'
+  } else {
+    juicesTitle = 'JUICES'
+  }
+
+  res.render('recipes/juices', {
+    juices,
+    juicesTitle,
+    msg
+  })
 })
 
 app.get('/help', (req, res) => {
