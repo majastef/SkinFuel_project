@@ -6,6 +6,9 @@ img {
   width: 300px;
   height: 250px;
   border-radius: 60px;
+  background-color: rgb(202, 185, 207);
+  border: 1.5px solid rgb(205, 198, 207);
+  box-shadow: 0 0 5px rgba(84, 144, 209, 0.5);
 }
 
 p {

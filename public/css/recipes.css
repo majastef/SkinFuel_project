@@ -186,6 +186,16 @@ h1 {
   align-items: center;
 }
 
+.parent-recipe img {
+  height: 270px;
+  width: 300px;
+  margin-top: 6px;
+  border-radius: 60px;
+  background-color: rgb(202, 185, 207);
+  border: 1.5px solid rgb(205, 198, 207);
+  box-shadow: 0 0 5px rgba(84, 144, 209, 0.5);
+}
+
 .parent-recipe h1 {
   margin: 2px auto;
   width: 100vw;

@@ -33,7 +33,10 @@
     </div>
 
     <div class="parent-recipe">
-      <h1>{{msg}}</h1>
+      {{#if img}}
+        <h1>Oops! There are no recipes for those filters!</h1>
+        <img src="{{img}}">
+      {{/if}}
       <h1>{{breakfastTitle}}</h1>
       <div class="recipe-box">
         {{#each breakfast}}

@@ -62,7 +62,7 @@ app.get('/recipes/meals', async (req, res) => {
   let breakfastTitle = ''
   let lunchTitle = ''
   let dinnerTitle = ''
-  let msg = ''
+  let img = ''
 
   if (fetchedFilters.length) {
     filters = fetchedFilters
@@ -85,7 +85,7 @@ app.get('/recipes/meals', async (req, res) => {
   }
 
   if (breakfast.length === 0 && lunch.length === 0 && dinner.length === 0) {
-    msg = 'Oops! There are no recipes for those filters!'
+    img = '/img/norecipes.jpg'
   }
   
   res.render('recipes/meals', {
@@ -95,7 +95,7 @@ app.get('/recipes/meals', async (req, res) => {
     lunchTitle,
     dinner,
     dinnerTitle,
-    msg
+    img
   })
 })
 
@@ -103,7 +103,7 @@ app.get('/recipes/meals', async (req, res) => {
 app.get('/recipes/juices', async (req, res) => {
   filter = 'none'
   let juicesTitle = ''
-  let msg = ''
+  let img = ''
 
   if (fetchedFilter) {
     filter = fetchedFilter
@@ -112,7 +112,7 @@ app.get('/recipes/juices', async (req, res) => {
   const juices = await fetchJuices(filter)
   
   if (juices.length === 0) {
-    msg = 'Oops! There are no juices for those filters!'
+    img = '/img/nojuices.jpg'
   } else {
     juicesTitle = 'JUICES'
   }
@@ -120,7 +120,7 @@ app.get('/recipes/juices', async (req, res) => {
   res.render('recipes/juices', {
     juices,
     juicesTitle,
-    msg
+    img
   })
 })
 
